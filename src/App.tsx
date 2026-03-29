@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 function App() {
   const [text, setText] = useState('')
-
-  useEffect(() => {
-    parseLine(text)
-  }, [text])
 
   return (
     <main className="w-screen h-screen flex p-8 gap-8 dark:bg-neutral-900 dark:text-white">
