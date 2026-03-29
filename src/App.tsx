@@ -28,7 +28,7 @@ function App() {
 function ParseText({ text }: { text: string }) {
   return (
     <pre className="w-full h-auto flex flex-col space-y-4 p-4 dark:bg-neutral-950">
-      {parseLine(text)}
+      {parseText(text)}
     </pre>
   )
 }
@@ -42,8 +42,8 @@ type LyricSegment =
   | { type: 'chord'; value: string; pos: number }
   | { type: 'text'; value: string; pos: number }
 
-function parseLine(source: string) {
-  const sections = source.split('\n\n')
+function parseText(text: string) {
+  const sections = text.split('\n\n')
   const songSection: LyricNode[] = []
 
   for (const section of sections) {
