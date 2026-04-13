@@ -50,48 +50,35 @@ function FormatView({ json }: { json: LyricNode[] }) {
 
 function JsonToHTML({ json }: { json: LyricNode[] }) {
   return (
-    <pre className="font-mono">
+    <div>
       {json.map((section, i) => (
-        <p key={i}>
+        <p key={i} className="pt-4">
           {section.children.map((line, j) => (
             <LyricLineElement lyricLine={line.children} key={j} />
           ))}
         </p>
       ))}
-    </pre>
+    </div>
   )
 }
 
 function LyricLineElement({ lyricLine }: { lyricLine: LyricSegment[] }) {
-  const chords = lyricLine.filter(c => c.type === 'chord')
-
   return (
-    <div className="font-mono">
-      <div className="flex">
-        {chords.map((chord, i) => {
-          const pad = chords[i - 1]?.pos ?? 0
-          const lenghtLast = chords[i - 1]?.type.length ?? 0
-
-          return (
-            <>
-              <span>
-                {' '.repeat(Math.max(chord.pos - pad - lenghtLast, 0))}
+    <div className="font-mono pt-4 bg-neutral-900 relative">
+      {lyricLine.map(lyric => {
+        switch (lyric.type) {
+          case 'chord':
+            return (
+              <span className="text-red-500 absolute -top-0.5">
+                {lyric.value}
               </span>
-              <span className="text-red-500">{chord.value}</span>
-            </>
-          )
-        })}
-      </div>
-      <div>
-        {lyricLine.map(lyric => {
-          switch (lyric.type) {
-            case 'label':
-              return <span className="text-gray-500">{lyric.value}</span>
-            case 'text':
-              return <span>{lyric.value}</span>
-          }
-        })}
-      </div>
+            )
+          case 'label':
+            return <span className="text-gray-500 relative">{lyric.value}</span>
+          case 'text':
+            return <span>{lyric.value}</span>
+        }
+      })}
     </div>
   )
 }
@@ -110,7 +97,7 @@ type LyricLine = { type: 'line'; children: LyricSegment[] }
 
 type LyricSegment =
   | { type: 'label'; value: string }
-  | { type: 'chord'; value: string; pos: number }
+  | { type: 'chord'; value: string }
   | { type: 'text'; value: string }
 
 function parseText(text: string) {
@@ -133,18 +120,15 @@ const parseLyricLine = (input: string) => {
   const regex = /([A-Z]\.)|\[([^\]]+)\]|([^[\]]+)/g
 
   const segments: LyricSegment[] = []
-  let posBuffer = 0
 
   for (const match of input.matchAll(regex)) {
     const [, label, chord, text] = match
 
     if (label) {
-      posBuffer += label.length
       segments.push({ type: 'label', value: label })
     } else if (chord) {
-      segments.push({ type: 'chord', value: chord, pos: posBuffer })
+      segments.push({ type: 'chord', value: chord })
     } else if (text) {
-      posBuffer += text.length
       segments.push({ type: 'text', value: text })
     }
   }
