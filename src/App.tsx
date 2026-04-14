@@ -14,10 +14,11 @@ function App() {
         <span className="font-bold dark:text-red-400 my-auto h-8">
           Escribir canto
         </span>
+        <InputView />
         <textarea
-          className="w-full h-full overflow-y-scroll p-4 font-mono dark:bg-neutral-800"
+          className="w-full h-full overflow-y-scroll py-2 px-2 font-mono dark:bg-neutral-800"
           onChange={e => setText(e.currentTarget.value)}
-          placeholder="# Title"
+          placeholder="A. [A]Aleluya, [D]aleluya, [G]aleluya"
         />
       </section>
       <section className="w-full h-full flex flex-col gap-4">
@@ -25,7 +26,7 @@ function App() {
           <span className="font-bold dark:text-red-400">Formato de Canto</span>
           <button
             onClick={() => setHiddenJson(!hiddenJson)}
-            className="bg-red-400 text-white px-4 h-full "
+            className="dark:bg-red-400 dark:text-white px-4 h-full "
           >
             {hiddenJson ? 'json' : 'formato'}
           </button>
@@ -37,6 +38,79 @@ function App() {
         )}
       </section>
     </main>
+  )
+}
+
+function InputView() {
+  const STAGE = {
+    precatechumenate: 'Precatecumenado',
+    liturgy: 'Liturgia',
+    election: 'Elección',
+    catechumenate: 'Catecumenado'
+  }
+
+  const TAGS = {
+    salp: 'Salmo',
+    chrismas: 'Navidad',
+    lent: 'Cuaresma'
+  }
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      <div className="min-w-32 flex flex-col gap-1">
+        <label htmlFor="title" className="text-sm dark:text-neutral-300">
+          Título
+        </label>
+        <input
+          id="title"
+          className="dark:bg-neutral-800 px-2 py-1"
+          placeholder="El Señor es mi pastor"
+        />
+      </div>
+      <div className="min-w-32 flex flex-col gap-1">
+        <label htmlFor="subtitle" className="text-sm dark:text-neutral-300">
+          Subtítulo
+        </label>
+        <input
+          id="subtitle"
+          className="dark:bg-neutral-800 px-2 py-1"
+          placeholder="Himno"
+        />
+      </div>
+      <div className="min-w-32 flex flex-col gap-1">
+        <label htmlFor="stage" className="text-sm dark:text-neutral-300">
+          Tíempo de camino
+        </label>
+        <select
+          id="stage"
+          name="stage"
+          className=" dark:bg-neutral-800 px-2 py-1"
+        >
+          {Object.entries(STAGE).map(([key, value], i) => (
+            <option key={i} className="" value={key}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="min-w-32 flex flex-col gap-1">
+        <label htmlFor="tags" className="text-sm dark:text-neutral-300">
+          Etiquetas
+        </label>
+        <select
+          multiple
+          id="tags"
+          name="tags"
+          className="dark:bg-neutral-800 px-2 py-1"
+        >
+          {Object.entries(TAGS).map(([key, value], i) => (
+            <option key={i} value={key}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   )
 }
 
@@ -52,11 +126,11 @@ function JsonToHTML({ json }: { json: LyricNode[] }) {
   return (
     <div>
       {json.map((section, i) => (
-        <p key={i} className="pt-4">
+        <div key={i} className="pt-4">
           {section.children.map((line, j) => (
             <LyricLineElement lyricLine={line.children} key={j} />
           ))}
-        </p>
+        </div>
       ))}
     </div>
   )
@@ -64,17 +138,19 @@ function JsonToHTML({ json }: { json: LyricNode[] }) {
 
 function LyricLineElement({ lyricLine }: { lyricLine: LyricSegment[] }) {
   return (
-    <div className="font-mono pt-4 bg-neutral-900 relative">
+    <div className="font-mono pt-4 relative">
       {lyricLine.map(lyric => {
         switch (lyric.type) {
           case 'chord':
             return (
-              <span className="text-red-500 absolute -top-0.5">
+              <span className="dark:text-red-500 absolute -top-0.5">
                 {lyric.value}
               </span>
             )
           case 'label':
-            return <span className="text-gray-500 relative">{lyric.value}</span>
+            return (
+              <span className="dark:text-gray-500 relative">{lyric.value}</span>
+            )
           case 'text':
             return <span>{lyric.value}</span>
         }
