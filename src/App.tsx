@@ -57,6 +57,19 @@ function InputView() {
 
   return (
     <div className="flex flex-wrap gap-2">
+      <div className="min-w-16 flex flex-col gap-1">
+        <label htmlFor="page" className="text-sm dark:text-neutral-300">
+          Página
+        </label>
+        <input
+          id="page"
+          type="number"
+          min="0"
+          max="999"
+          className="dark:bg-neutral-800 px-2 py-1"
+          placeholder="0-999"
+        />
+      </div>
       <div className="min-w-32 flex flex-col gap-1">
         <label htmlFor="title" className="text-sm dark:text-neutral-300">
           Título
