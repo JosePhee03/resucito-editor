@@ -20,7 +20,7 @@ export function FormSection() {
   }
 
   return (
-    <section className="h-screen w-full md:h-full p-4 md:p-0">
+    <section className="h-dvh w-full pt-10 pb-4 md:p-0 md:h-full">
       <form
         onSubmit={onSubmitHandler}
         className="w-full h-full flex flex-col gap-4"
@@ -72,7 +72,7 @@ function FormView({
     setSong(prev => {
       const value = e.target.value
       const newSong = { ...prev }
-      newSong['stage'] = value as SongJson['stage']
+      newSong['stage'] = value as Song['stage']
       return newSong
     })
   }
@@ -82,7 +82,7 @@ function FormView({
       const value = Array.from(
         e.target.selectedOptions,
         option => option.value
-      ) as SongJson['tags']
+      ) as Song['tags']
       const newSong = { ...prev }
       newSong['tags'] = value
       return newSong

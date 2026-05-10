@@ -8,7 +8,7 @@ export default function ViewSection() {
   const [hiddenJson, setHiddenJson] = useState(true)
 
   return (
-    <section className="w-full h-screen md:h-full flex flex-col p-4 md:p-0 gap-4">
+    <section className="w-full h-dvh py-4 md:p-0 md:h-full flex flex-col gap-4">
       <div className="flex justify-between items-center h-8">
         <span className="font-bold text-red-500 dark:text-red-400">
           Formato de Canto
