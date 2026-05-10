@@ -1,15 +1,22 @@
-import { FormSection } from './componets/FormSection'
-import ViewSection from './componets/ViewSection'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { SongProvider } from './store/SongContext'
+import SongEditor from './routes/SongEditor'
+import SongList from './routes/SongList'
+import Header from './componets/Header'
 
 function App() {
   return (
-    <SongProvider>
-      <main className="flex flex-col w-full h-full md:w-screen md:h-screen md:grid grid-cols-2 md:p-8 md:gap-8 bg-neutral-50 text-black dark:bg-neutral-900 dark:text-white">
-        <FormSection />
-        <ViewSection />
-      </main>
-    </SongProvider>
+    <div className="min-h-screen md:w-screen md:h-screen">
+      <BrowserRouter>
+        <Header />
+        <SongProvider>
+          <Routes>
+            <Route path="/" element={<SongEditor />} />
+            <Route path="/search" element={<SongList />} />
+          </Routes>
+        </SongProvider>
+      </BrowserRouter>
+    </div>
   )
 }
 
