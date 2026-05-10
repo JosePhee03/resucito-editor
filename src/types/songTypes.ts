@@ -5,6 +5,8 @@ export type Song = {
   stage: keyof typeof STAGE | undefined
   tags: (keyof typeof TAGS)[]
   lyric: string
+  chords: string[]
+  capo: number
 }
 
 export const STAGE = {

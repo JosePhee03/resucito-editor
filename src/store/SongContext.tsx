@@ -7,7 +7,9 @@ const INITIAL_SONG_JSON: Song = {
   subtitle: '',
   stage: 'precatechumenate',
   tags: [],
-  lyric: ''
+  lyric: '',
+  capo: 0,
+  chords: []
 }
 
 type SongContextType = {
