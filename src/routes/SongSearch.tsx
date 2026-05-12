@@ -1,7 +1,8 @@
 import type { Song } from '../types/song'
-import { useSong } from '../hooks/useSong'
+import { useSong } from '../hooks/useSongs'
 import { useEffect } from 'react'
 import type { Pagination } from '../types/pagination'
+import { Link } from 'react-router-dom'
 
 export default function SongSearch() {
   const { songsSearch, search } = useSong()
@@ -26,7 +27,8 @@ function SongList({ songs }: { songs: Song[] }) {
   return (
     <div className="pt-14 flex flex-col items-center">
       {songs.map(song => (
-        <div
+        <Link
+          to={`/edit/${song.id}`}
           key={song.id}
           className="w-full px-4 sm:px-8 py-2 flex md:justify-center odd:bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer"
         >
@@ -44,7 +46,7 @@ function SongList({ songs }: { songs: Song[] }) {
               </span>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   )

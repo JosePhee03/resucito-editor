@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { useSongState } from '../hooks/songState'
 import type { LyricSegment, Song } from '../types/song'
 import { lyricParser } from '../utils/lyricParse'
 
-export default function ViewSection() {
-  const { song } = useSongState()
+export default function ViewSection({ song }: { song: Song }) {
   const [hiddenJson, setHiddenJson] = useState(true)
 
   return (

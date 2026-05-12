@@ -1,3 +1,5 @@
+import type { STAGE, TAGS } from '../constant/tags'
+
 export type Song = {
   id: string
   page: number | undefined
@@ -8,19 +10,6 @@ export type Song = {
   lyric: string
   chords: string[]
   capo: number
-}
-
-export const STAGE = {
-  precatechumenate: 'Precatecumenado',
-  liturgy: 'Liturgia',
-  election: 'Elección',
-  catechumenate: 'Catecumenado'
-}
-
-export const TAGS = {
-  salp: 'Salmo',
-  chrismas: 'Navidad',
-  lent: 'Cuaresma'
 }
 
 export type LyricNode = { type: 'section'; children: LyricLine[] }

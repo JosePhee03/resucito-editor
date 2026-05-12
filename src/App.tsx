@@ -7,7 +7,7 @@ import { useAuthStore } from './stores/authStore'
 import { auth } from './database/supabase'
 import type AppError from './database/error'
 import { useEffect } from 'react'
-import { useSong } from './hooks/useSong'
+import { useSong } from './hooks/useSongs'
 
 onAuthStateChanged(auth, user => {
   const { setUser, setLoading } = useAuthStore.getState()
@@ -50,6 +50,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<SongSearch />} />
                 <Route path="/edit" element={<SongEditor />} />
+                <Route path="/edit/:id" element={<SongEditor />} />
               </Routes>
             )}
           </>

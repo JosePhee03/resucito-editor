@@ -1,17 +1,16 @@
 import { type ChangeEvent } from 'react'
-import { STAGE, TAGS, type Song } from '../types/song'
-import { useSongState } from '../hooks/songState'
+import type { Song } from '../types/song'
+import { STAGE, TAGS } from '../constant/tags'
 
-export function FormSection() {
-  const { song, setSong } = useSongState()
-
+export function FormSection({
+  song,
+  setSong
+}: {
+  song: Song
+  setSong: React.Dispatch<React.SetStateAction<Song>>
+}) {
   const saveSong = () => {
-    const saved = localStorage.getItem('song')
-
-    const savedSong: Song[] = saved ? JSON.parse(saved) : []
-    savedSong.push(song)
-    localStorage.setItem('songs', JSON.stringify(savedSong))
-    console.log(JSON.stringify(savedSong, null, 2))
+    console.log('GUARDAR')
   }
 
   const onSubmitHandler = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -20,7 +19,7 @@ export function FormSection() {
   }
 
   return (
-    <section className="h-dvh w-full pt-10 pb-4 md:p-0 md:h-full">
+    <section className="w-full pt-10 pb-4 md:p-0 md:h-full">
       <form
         onSubmit={onSubmitHandler}
         className="w-full h-full flex flex-col gap-4"

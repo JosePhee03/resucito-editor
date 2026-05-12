@@ -57,6 +57,10 @@ export function useSong() {
     })
   }
 
+  const getSong = (id: string) => {
+    return songs.find(song => song.id === id)
+  }
+
   const reset = () => {
     setSongs([])
     loadSongs()
@@ -69,7 +73,8 @@ export function useSong() {
     error,
     reset,
     search,
-    songsSearch
+    songsSearch,
+    getSong
   }
 }
 

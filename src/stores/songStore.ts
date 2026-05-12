@@ -10,17 +10,19 @@ type SongStore = {
   setSongs: (songs: Song[]) => void
   setLoading: (value: boolean) => void
   setError: (value: AppError | null) => void
+  getSong: (id: string) => Song | undefined
 }
 
 export const useSongStore = create<SongStore, [['zustand/persist', SongStore]]>(
   persist(
-    set => ({
+    (set, get) => ({
       songs: [],
       error: null,
       isLoading: true,
       setSongs: songs => set({ songs }),
       setLoading: value => set({ isLoading: value }),
-      setError: value => set({ error: value })
+      setError: value => set({ error: value }),
+      getSong: id => get().songs.find(song => song.id === id)
     }),
     {
       name: 'songs-storage'
