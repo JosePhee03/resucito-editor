@@ -1,7 +1,7 @@
 import type { Song } from '../types/song'
 import { useSong } from '../hooks/useSong'
 import { useEffect } from 'react'
-import type { Pagination } from '../types/paginationType'
+import type { Pagination } from '../types/pagination'
 
 export default function SongSearch() {
   const { songsSearch, search } = useSong()
