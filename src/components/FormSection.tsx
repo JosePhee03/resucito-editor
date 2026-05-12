@@ -1,5 +1,5 @@
 import { type ChangeEvent } from 'react'
-import { STAGE, TAGS, type Song } from '../types/songTypes'
+import { STAGE, TAGS, type Song } from '../types/song'
 import { useSongState } from '../hooks/songState'
 
 export function FormSection() {

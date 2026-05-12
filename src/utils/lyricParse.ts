@@ -1,4 +1,4 @@
-import type { LyricLine, LyricNode, LyricSegment } from '../types/songTypes'
+import type { LyricLine, LyricNode, LyricSegment } from '../types/song'
 
 export function lyricParser(lyric: string) {
   const sections = lyric.split('\n\n')

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSongState } from '../hooks/songState'
-import type { LyricSegment, Song } from '../types/songTypes'
+import type { LyricSegment, Song } from '../types/song'
 import { lyricParser } from '../utils/lyricParse'
 
 export default function ViewSection() {

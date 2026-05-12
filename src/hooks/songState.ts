@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { SongContext } from '../store/SongContext'
+import { SongContext } from '../stores/SongContext'
 
 export function useSongState() {
   const context = useContext(SongContext)
