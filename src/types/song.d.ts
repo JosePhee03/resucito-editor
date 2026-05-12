@@ -1,4 +1,5 @@
 export type Song = {
+  id: string
   page: number | undefined
   title: string
   subtitle: string
